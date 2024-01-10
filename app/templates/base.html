@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Onze Applicatie - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/tailwind.css')}}"/>
+  </head>
+
+  <body class="main">
+    <nav>
+      <ul>
+        <a href="{{ url_for('main.index') }}"> <img src="../static/img/socialsync.png" class="socialsync-home" alt="Home"></a>
+        <a href="{{ url_for('auth.users') }}">Gebruikers</a>
+        {% if g.user %}
+          <a href="{{ url_for('auth.logout') }}">Uitloggen</a>
+          <a href="{{ url_for('auth.edit') }}">{{ g.user['firstname'] }}</a>
+        {% else %}
+          <a href="{{ url_for('auth.login') }}">Login</a>
+          <a href="{{ url_for('auth.register') }}">Registreren</a>
+        {% endif %}
+      </ul>
+    </nav>
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+    <div>
+      {% block content %}{% endblock %}
+    </div>
+    <footer id="footer">
+      Hier komt een goede footer.
+    </footer>
+  </body>
+</html>
